@@ -5,54 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rod Game</title>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0;
-      }
-
       #container {
         position: relative;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
       }
 
       #ball {
         width: 20px;
         height: 20px;
         background-color: red;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: fixed;
+        top: 20px;
+        left: 52.5%;
         border-radius: 50%;
       }
 
       #rod1,
       #rod2 {
-        width: 150px;
+        width: 200px;
         height: 20px;
-        background-color: blue;
-        position: absolute;
-        border-radius: 10px;
+        position: fixed;
+        left: 50%;
+        border-radius: 25px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
       }
 
       #rod1 {
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        background-color: blue;
+        top: 0px;
       }
 
       #rod2 {
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        background-color: blueviolet;
+        bottom: 0px;
       }
 
       #playButton {
@@ -148,7 +134,7 @@
         rod = localStorage.getItem(storeName);
         maxScore = localStorage.getItem(storeScore);
 
-        if (rod === "null" || maxScore === "null") {
+        if (!rod || !maxScore) {
           alert(
             "This is the first time you are playing this game. LET'S START"
           );
@@ -166,11 +152,13 @@
         rod2.style.left = (windowWidth - rod2.offsetWidth) / 2 + "px";
         ball.style.left = (windowWidth - ball.offsetWidth) / 2 + "px";
 
+        // Position the ball at the losing rod's side for the next round
         if (rodName === rod2Name) {
-          ball.style.top = rod1.offsetTop + rod1.offsetHeight + "px";
+          ball.style.top = rod1.offsetHeight + "px";
           ballSpeedY = 2;
-        } else if (rodName === rod1Name) {
-          ball.style.top = rod2.offsetTop - rod2.offsetHeight + "px";
+        } else {
+          ball.style.top =
+            windowHeight - rod2.offsetHeight - ball.offsetHeight + "px";
           ballSpeedY = -2;
         }
 
@@ -231,8 +219,8 @@
           gameOn = true;
           playButton.style.display = "none"; // Hide play button during gameplay
           let ballRect = ball.getBoundingClientRect();
-          let ballX = ballRect.x;
-          let ballY = ballRect.y;
+          let ballX = ballRect.left;
+          let ballY = ballRect.top;
           let ballDia = ballRect.width;
 
           let rod1Height = rod1.offsetHeight;
@@ -244,8 +232,8 @@
             ballX += ballSpeedX;
             ballY += ballSpeedY;
 
-            rod1X = rod1.getBoundingClientRect().x;
-            rod2X = rod2.getBoundingClientRect().x;
+            rod1X = rod1.getBoundingClientRect().left;
+            rod2X = rod2.getBoundingClientRect().left;
 
             ball.style.left = ballX + "px";
             ball.style.top = ballY + "px";
