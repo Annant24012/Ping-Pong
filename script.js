@@ -71,14 +71,23 @@ function storeWin(rod, score) {
   );
 }
 
-// Mouse move event listener to control rods
+// Mouse move event listener to control rods (for desktops/laptops)
 window.addEventListener("mousemove", function (event) {
   let mouseX = event.clientX;
 
-  // Ensure the rods stay within the window boundaries
   if (mouseX > 0 && mouseX < windowWidth - rod1.offsetWidth) {
     rod1.style.left = mouseX + "px";
     rod2.style.left = mouseX + "px";
+  }
+});
+
+// Touch move event listener to control rods (for phones/tablets)
+window.addEventListener("touchmove", function (event) {
+  let touchX = event.touches[0].clientX;
+
+  if (touchX > 0 && touchX < windowWidth - rod1.offsetWidth) {
+    rod1.style.left = touchX + "px";
+    rod2.style.left = touchX + "px";
   }
 });
 

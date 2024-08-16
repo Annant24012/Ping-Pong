@@ -1,34 +1,99 @@
 #container {
-    position: relative;
+  position: relative;
 }
 
 #ball {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    position: fixed;
-    top: 20px;
-    left: 52.5%;
-    border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: fixed;
+  top: 20px;
+  left: 52.5%;
+  border-radius: 50%;
 }
 
-#rod1, #rod2 {
-    width: 200px;
-    height: 20px;
-    position: fixed;
-    left: 50%;
-    border-radius: 25px;
-    text-align: center;
-    color: white;
-    font-weight: bold;
+#rod1,
+#rod2 {
+  width: 200px;
+  height: 20px;
+  position: fixed;
+  left: 50%;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
 }
 
 #rod1 {
-    background-color: blue;
-    top: 0px;    
+  background-color: blue;
+  top: 0px;
 }
 
 #rod2 {
-    background-color: blueviolet;
-    bottom: 0px;
+  background-color: blueviolet;
+  bottom: 0px;
+}
+
+/* General styling */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#rod1,
+#rod2 {
+  width: 150px;
+  height: 20px;
+  background-color: #00f;
+  position: absolute;
+}
+
+#ball {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Media Queries */
+
+/* For small screens (phones) */
+@media (max-width: 600px) {
+  #rod1,
+  #rod2 {
+    width: 80px;
+  }
+
+  #ball {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* For medium screens (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  #rod1,
+  #rod2 {
+    width: 120px;
+  }
+
+  #ball {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* For large screens (desktops/laptops) */
+@media (min-width: 1025px) {
+  #rod1,
+  #rod2 {
+    width: 150px;
+  }
+
+  #ball {
+    width: 20px;
+    height: 20px;
+  }
 }
